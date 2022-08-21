@@ -10,6 +10,8 @@ pub enum PrestigeError{
     #[error("Unknown Error")]
     UnknownError,
 
+    #[error("Wrong Struct Key Found")]
+    WrongStructKey
 }
 
 
@@ -24,8 +26,9 @@ impl PrestigeError{
     pub fn log(self, keyword:Option<&str>)->ProgramError{
         match self {
             Self::AddressMismatch => {msg!("Error:  Dissimilarity in the provided keypairs");}
+            Self::WrongStructKey => msg!("keyword: {:?}. Error: Wrong Struct Key Found", if let Some(key) = keyword{key} else {""}),
 
-            _ =>  if let Some(keyword) = keyword{msg!("Error: keyword{:?} Error not labeled!!", keyword)}
+            _ =>  msg!("Error: keyword{:?} Error not labeled!!", if let Some(key) = keyword{key} else {""})
             
         }
         ProgramError::from(self)

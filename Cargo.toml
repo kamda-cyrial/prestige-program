@@ -6,15 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-solana-program = "1.10.29"
+solana-program = "1.11.7"
 borsh = "0.9.3"
-spl-token = "3.3.0"
+spl-token = "3.5.0"
 borsh-derive = "0.9.3"
-spl-associated-token-account = "1.0.5"
+spl-associated-token-account = "1.1.1"
 cond_utils = "0.1.0"
-thiserror = "1.0.31"
-num-derive = "0.3"
-num-traits = "0.2"
+thiserror = "1.0.32"
+num-derive = "0.3.3"
+num-traits = "0.2.15"
 
 [profile.release]
 overflow-checks = true
