@@ -16,6 +16,10 @@ Cargo.lock
 
 #deploy key exemption
 deploy/
+__pycache__/
+Prestige_CLI.egg-info/
+prestige-cli/
+quick_test.ipynb
 
 # Added by cargo
 #
@@ -23,3 +27,4 @@ deploy/
 
 #/target
 /Cargo.lock
+

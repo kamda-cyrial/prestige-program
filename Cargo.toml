@@ -10,7 +10,7 @@ solana-program = "1.11.7"
 borsh = "0.9.3"
 spl-token = "3.5.0"
 borsh-derive = "0.9.3"
-spl-associated-token-account = "1.1.1"
+spl-associated-token-account = {version = "1.1.1", features = ["no-entrypoint"] }
 cond_utils = "0.1.0"
 thiserror = "1.0.32"
 num-derive = "0.3.3"
@@ -26,4 +26,4 @@ crate-type = ["cdylib", "lib"]
 [package.metadata.x]
 deploy-pubkey = "solana-keygen pubkey ./deploy/keypair.json"
 new-deploy-address = "solana-keygen new -o ./deploy/keypair.json --no-bip39-passphrase --force"
-build-deploy-address = "solana config set --url https://api.devnet.solana.com && cargo build-bpf && solana program deploy --program-id ./deploy/keypair.json ../../target/deploy/prestige-program.so"
+build-deploy-address = "solana config set --url https://api.devnet.solana.com && cargo build-bpf && solana program deploy --program-id ./deploy/keypair.json target/deploy/prestige_program.so"

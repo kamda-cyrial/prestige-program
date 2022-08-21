@@ -76,6 +76,7 @@ pub fn process_reward_xp(program_id: &Pubkey, accounts: &[AccountInfo], total_xp
 
     let mut user_data = UserData::decode(user_data_info)?;
 
+    assert_pubkeys_exactitude(&Pubkey::from(user_data.user_address), user_account_info.key ).unwrap();
     user_data.total_xp = user_data.total_xp.checked_add(total_xp).unwrap();
     if user_data.rank != Rank::xp_to_rank(user_data.total_xp){
         user_data.rank = Rank::xp_to_rank(user_data.total_xp);
@@ -90,8 +91,6 @@ pub fn process_reward_xp(program_id: &Pubkey, accounts: &[AccountInfo], total_xp
 pub fn process_init_configuration(program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResult {
     let account_info_iter = &mut accounts.iter();
     let payer_account_info = next_account_info(account_info_iter)?;
-    let user_account_info = next_account_info(account_info_iter)?;
-    let user_token_account_info = next_account_info(account_info_iter)?;
     let mint_account_info = next_account_info(account_info_iter)?;
     // let system_program_account_info = next_account_info(account_info_iter)?;
     let spl_token_program_account_info = next_account_info(account_info_iter)?;
@@ -100,9 +99,6 @@ pub fn process_init_configuration(program_id: &Pubkey, accounts: &[AccountInfo])
 
     let (xp_mint_address, xp_mint_bump) = Pubkey::find_program_address(&[XP_MINT_KEY.as_ref()], program_id);
     assert_pubkeys_exactitude(&xp_mint_address, mint_account_info.key).unwrap();
-
-    let expected_token_account_info = get_associated_token_address(user_account_info.key, &xp_mint_address);
-    assert_pubkeys_exactitude(&expected_token_account_info, user_token_account_info.key).unwrap();
 
     let (expected_general_authority_key, _general_authority_bump) = Pubkey::find_program_address(&[GENERAL_AUTHORITY_KEY.as_ref()], program_id);
     assert_pubkeys_exactitude(&expected_general_authority_key, general_authority.key).unwrap();
@@ -159,18 +155,19 @@ pub fn process_register_user(program_id: &Pubkey, accounts: &[AccountInfo], user
 
     let expected_token_account_info = get_associated_token_address(user_account_info.key, &xp_mint_address);
     assert_pubkeys_exactitude(&expected_token_account_info, user_token_account_info.key).unwrap();
-    let space = 15;
+    let space = 50;
 
     let (expected_freeze_authority_key, freeze_authority_bump) = Pubkey::find_program_address(&[GENERAL_AUTHORITY_KEY.as_ref()], program_id);
     assert_pubkeys_exactitude(&expected_freeze_authority_key, freeze_authority.key).unwrap();
 
     invoke_signed(
         &system_instruction::create_account(payer_account_info.key, user_data_info.key,  Rent::get()?.minimum_balance(space), space as u64, program_id),
-        &[],
+        &[payer_account_info.clone(), user_data_info.clone()],
         &[&[USERREGKEY.as_ref(), user_name.as_slice(), &[expected_user_data_bump]]]
     )?;
     let user_data = UserData{
         total_xp: 0,
+        user_address: user_account_info.key.to_bytes(),
         rank: Rank::None,
         registration_date: Clock::get()?.unix_timestamp as u32,
         struct_key: USERDATA_STRUCT_KEY,

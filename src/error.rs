@@ -11,7 +11,7 @@ pub enum PrestigeError{
     UnknownError,
 
     #[error("Wrong Struct Key Found")]
-    WrongStructKey
+    WrongStructKey,
 }
 
 

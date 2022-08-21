@@ -7,7 +7,7 @@ use crate::error::PrestigeError;
 use self::constants::USERDATA_STRUCT_KEY;
 
 pub mod constants{
-    solana_program::declare_id!("cb8zdnsdLA9dwzf65LmMZ745Z1M8DYSZZht1CADeouZ");
+    solana_program::declare_id!("9HUVdKeXEFJVBuLKeM8y6u8pT3q4gNTnDRoKD29G3Dn5");
 
     pub mod authorized{
         solana_program::declare_id!("cb8zdnsdLA9dwzf65LmMZ745Z1M8DYSZZht1CADeouZ");
@@ -61,6 +61,7 @@ pub struct Issue{
 #[derive(BorshDeserialize, BorshSerialize)]
 pub struct UserData{
     pub struct_key: u32,
+    pub user_address: [u8;32],
     pub total_xp: u64,
     pub rank: Rank,
     pub registration_date: u32,
