@@ -8,7 +8,7 @@ use processor::process_instruction;
 use solana_program::entrypoint;
 
 entrypoint!(process_instruction);
-//a new approach
+//a friendly approach
 
 
 
