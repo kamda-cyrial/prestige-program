@@ -8,7 +8,7 @@ use processor::process_instruction;
 use solana_program::entrypoint;
 
 entrypoint!(process_instruction);
-//back to the oldn trials
+//This is an attempt to log the json as is to be expected
 
 
 #[cfg(test)]
