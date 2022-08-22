@@ -8,7 +8,7 @@ use processor::process_instruction;
 use solana_program::entrypoint;
 
 entrypoint!(process_instruction);
-//lol, this is super interesting.
+//another trial at json dumping
 
 
 
