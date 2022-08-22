@@ -8,7 +8,7 @@ use processor::process_instruction;
 use solana_program::entrypoint;
 
 entrypoint!(process_instruction);
-//back to the oldn trials
+//lol, this is super interesting.
 
 
 #[cfg(test)]
