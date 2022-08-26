@@ -3,10 +3,7 @@ use {
         prelude::*,
         solana_program::program::invoke_signed,
     },
-    anchor_spl::{
-        token,
-        associated_token,
-    },
+    anchor_spl::token,
     mpl_token_metadata::instruction as mpl_instruction,
 };
 
@@ -31,7 +28,7 @@ pub fn init(
     ctx.accounts.prestige_mint_authority.set_inner(prestige_mint_authority.clone());
 
     // Create XP Token Mint's Metadata
-    //
+    
     invoke_signed(
         &mpl_instruction::create_metadata_accounts_v2(
             ctx.accounts.mpl_token_metadata_program.key(),
@@ -97,7 +94,6 @@ pub struct Init<'info> {
     rent: Sysvar<'info, Rent>,
     system_program: Program<'info, System>,
     token_program: Program<'info, token::Token>,
-    associated_token_program: Program<'info, associated_token::AssociatedToken>,
     /// CHECK: Metaplex will check this
     mpl_token_metadata_program: UncheckedAccount<'info>,
 }

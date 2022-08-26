@@ -63,7 +63,10 @@ pub struct CreateUserAccount<'info> {
         init,
         payer = payer,
         space = PrestigeUserData::ACCOUNT_SPACE,
-        seeds = [PrestigeUserData::SEED_PREFIX.as_bytes().as_ref()],
+        seeds = [
+            PrestigeUserData::SEED_PREFIX.as_bytes().as_ref(),
+            payer.key().as_ref(),
+        ],
         bump
     )]
     prestige_user_data: Account<'info, PrestigeUserData>,

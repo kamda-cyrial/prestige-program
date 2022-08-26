@@ -49,7 +49,6 @@ describe("Prestige DAO", async () => {
             ))[0],
             [testWallet.payer]
         );
-        await printUserData(testWallet.publicKey);
     });
 
     it("Mint XP to user", async () => {
@@ -62,7 +61,6 @@ describe("Prestige DAO", async () => {
             ))[0],
             [testWallet.payer]
         );
-        await printXpBalance(testWallet.publicKey);
     });
 
     async function primeNewWallet(walletName: string) {
@@ -75,17 +73,4 @@ describe("Prestige DAO", async () => {
         console.log(`Pubkey: ${keypair.publicKey}`);
         return new anchor.Wallet(keypair);
     }
-
-    async function printUserData(address: anchor.web3.PublicKey) {
-        const userData = await program.account.userData.fetch(address);
-        console.log(`Profile        : ${address}`);
-        console.log(`   GitHub ID   : ${userData.gitHubId}`);
-        console.log(`   First Name  : ${userData.firstName}`);
-        console.log(`   Last Name   : ${userData.lastName}`);
-        console.log(`   School      : ${userData.school}`);
-    };
-
-    async function printXpBalance(address: anchor.web3.PublicKey) {
-        // ?
-    };
 });

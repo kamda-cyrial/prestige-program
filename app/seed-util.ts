@@ -19,17 +19,20 @@ export class SeedUtil {
         ))[0]
     }
 
-    async init(
-        walletPubkey: anchor.web3.PublicKey,
-    ) {
+    async deriveMetadataPda(seeds: Buffer[]) {
+        return (await anchor.web3.PublicKey.findProgramAddress(
+            seeds, constants.TOKEN_METADATA_PROGRAM_ID
+        ))[0]
+    }
+
+    async init() {
         this.prestigeMintAuthorityPda = await this.derivePda([
             Buffer.from(constants.MINT_AUTHORITY_SEED),
-            walletPubkey.toBuffer(), 
         ]);
         this.prestigeXpMint = await this.derivePda([
             Buffer.from(constants.XP_MINT_SEED),
         ]);
-        this.prestigeXpMintMetadata = await this.derivePda([
+        this.prestigeXpMintMetadata = await this.deriveMetadataPda([
             Buffer.from("metadata"),
             constants.TOKEN_METADATA_PROGRAM_ID.toBuffer(),
             this.prestigeXpMint.toBuffer(),
@@ -50,6 +53,7 @@ export class SeedUtil {
     ): Promise<anchor.web3.PublicKey> {
         return await this.derivePda([
             Buffer.from(constants.PRESTIGE_USER_DATA_SEED),
+            walletPubkey.toBuffer(),
         ]);
     }
 
