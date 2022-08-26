@@ -1,0 +1,223 @@
+{
+  "version": "0.1.0",
+  "name": "prestige_program",
+  "instructions": [
+    {
+      "name": "init",
+      "accounts": [
+        {
+          "name": "prestigeMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpMintMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mplTokenMetadataProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createUserAccount",
+      "accounts": [
+        {
+          "name": "prestigeMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeUserData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "githubUserId",
+          "type": "string"
+        },
+        {
+          "name": "firstName",
+          "type": "string"
+        },
+        {
+          "name": "lastName",
+          "type": "string"
+        },
+        {
+          "name": "school",
+          "type": {
+            "option": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mintXp",
+      "accounts": [
+        {
+          "name": "prestigeMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeXpTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "prestigeUserData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "PrestigeMintAuthority",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "xpMintBump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PrestigeUserData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "walletPubkey",
+            "type": "publicKey"
+          },
+          {
+            "name": "githubUserId",
+            "type": "string"
+          },
+          {
+            "name": "firstName",
+            "type": "string"
+          },
+          {
+            "name": "lastName",
+            "type": "string"
+          },
+          {
+            "name": "school",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "DyiVPsExWgRDUk8dTNQB9bxirCC9e6C3cyhJN1MwQ7ac"
+  }
+}
