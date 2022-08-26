@@ -59,7 +59,10 @@ pub struct MintXp<'info> {
     // We need the User Data PDA to get their wallet pubkey
     #[account(
         mut,
-        seeds = [PrestigeUserData::SEED_PREFIX.as_bytes().as_ref()],
+        seeds = [
+            PrestigeUserData::SEED_PREFIX.as_bytes().as_ref(),
+            prestige_user_data.wallet_pubkey.as_ref(),
+        ],
         bump = prestige_user_data.bump,
     )]
     prestige_user_data: Account<'info, PrestigeUserData>,
